@@ -1,0 +1,33 @@
+version: '3'  # Docker Compose file format version
+
+services: # Define containers to run
+
+  server: # First container: the server
+    build: .  # Build from Dockerfile in current directory
+    container_name: server  # Name it 'server'
+    ports:
+      - "5001:5000" # Map host port 5001 to container port 5000
+    networks:
+      - app-network # Connect to app-network
+
+  client1:  # Second container: first client
+    build: .  # Use same Dockerfile (python:3.11 base)
+    container_name: client1 # Name it 'client1'
+    command: python -u client.py  # Override CMD, run client instead of server
+    depends_on:
+      - server  # Wait for server to start first
+    networks:
+      - app-network # Connect to same network as server
+
+  client2:  # Third container: second client
+    build: . # Use same Dockerfile
+    container_name: client2 # Name it 'client2'
+    command: python -u client.py # Run client script
+    depends_on:
+      - server # Wait for server
+    networks:
+      - app-network # Same network
+
+networks: # Define custom networks
+  app-network:  # Create a network called 'app-network'
+    driver: bridge # Use bridge driver (containers can talk to each other)
