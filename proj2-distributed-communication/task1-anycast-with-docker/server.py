@@ -7,7 +7,7 @@ def start_server(host='0.0.0.0', port=5000):
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.bind((host, port))
     server.listen(5)
-    print(f"Accepted connection from ({host}, {port})")
+    print(f"Server ready on port {port}")
 
     while True:
         client, addr = server.accept()

@@ -18,9 +18,9 @@ services:
     environment:
       - SERVER_ID=server3
 
-# Client container - overrides CMD to run client.py instead
-# depends_on ensures servers are up before client starts
-client:
+  # Client container - overrides CMD to run client.py instead
+  # depends_on ensures servers are up before client starts
+  client:
   build: .
   command: python client.py
   depends_on:
