@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  # Three server containers built from the same Dockerfile.
+  # SERVER_ID distinguishes them at runtime via os.environ.get()
+  server1:
+    build: .
+    environment:
+      - SERVER_ID=server1
+
+  server2:
+    build: .
+    environment:
+      - SERVER_ID=server2
+
+  server3:
+    build: .
+    environment:
+      - SERVER_ID=server3
+
+# Client container - overrides CMD to run client.py instead
+# depends_on ensures servers are up before client starts
+client:
+  build: .
+  command: python client.py
+  depends_on:
+    - server1
+    - server2
+    - server3
