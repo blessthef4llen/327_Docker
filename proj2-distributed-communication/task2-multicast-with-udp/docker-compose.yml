@@ -1,0 +1,37 @@
+services:
+  # --- Senders ---
+  # Two sender containers built from the same image
+  # SENSOR_TYPE distinguishes them at runtime — same pattern as SERVER_ID in Task 1
+  sender1:
+    build: .
+    environment:
+      - SENSOR_TYPE=temp
+
+  sender2:
+    build: .
+    environment:
+      - SENSOR_TYPE=humidity
+
+  # --- Receivers ---
+  # Two receiver containers built from the same image
+  # `python -u` - forces python to run in unbuffered mode
+  #   - allows to print immediately instead of being held in a buffer
+  # `DURATION` - controls how long each receiver listens before leaving the multicast group
+  # `depends_on` - ensures senders are up before receivers start
+  receiver1:
+    build: .
+    command: python -u multicast_receiver.py
+    environment:
+      - DURATION=60
+    depends_on:
+      - sender1
+      - sender2
+
+  receiver2:
+    build: .
+    command: python -u multicast_receiver.py
+    environment:
+      - DURATION=60
+    depends_on:
+      - sender1
+      - sender2
