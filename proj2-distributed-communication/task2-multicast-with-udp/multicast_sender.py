@@ -32,7 +32,7 @@ def create_socket():
 # send_messages()
 # ============================================================
 # Purpose: continuously sends two types of messages to the
-# multicast group — JSON and binary — until interrupted.
+# multicast group. JSON and binary, until interrupted.
 # The sensor type is injected via environment variable so
 # the same file can run as temp sender or humidity sender.
 
@@ -66,7 +66,7 @@ def send_messages():
         # --- Binary message ---
         # os.urandom(8) generates 8 cryptographically random bytes
         # this simulates raw binary sensor data (e.g. a packed sensor reading)
-        # no encode() needed — it's already bytes
+        # no encode() needed, it's already bytes
         binary_message = os.urandom(8)
         sock.sendto(binary_message, (MULTICAST_GROUP, PORT))
         print(f"Sent binary data: {binary_message}")

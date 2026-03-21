@@ -3,7 +3,7 @@
 Simulates IP multicast by having multiple sender containers broadcast sensor data to a 
 multicast group address (224.1.1.1). Multiple receiver containers join the group 
 simultaneously and receive messages from all senders at once, demonstrating how multicast 
-differs from unicast — one broadcast reaches many receivers without sending individually 
+differs from unicast; one broadcast reaches many receivers without sending individually 
 to each.
 
 ## Project Structure

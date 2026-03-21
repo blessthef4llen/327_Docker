@@ -58,7 +58,7 @@ def receive_messages(duration):
             # blocks until a packet arrives or the 1 second timeout hits
             data, addr = sock.recvfrom(1024)
             print(f"Received: Multicast message from {addr}")
-            # sender broadcasts both JSON and binary — handle both types
+            # sender broadcasts both JSON and binary; handle both types
             try:
                 message = json.loads(data.decode('utf-8'))
                 print(f"Received: {message}")

@@ -1,7 +1,7 @@
 services:
   # --- Senders ---
   # Two sender containers built from the same image
-  # SENSOR_TYPE distinguishes them at runtime — same pattern as SERVER_ID in Task 1
+  # SENSOR_TYPE distinguishes them at runtime
   sender1:
     build: .
     environment:
