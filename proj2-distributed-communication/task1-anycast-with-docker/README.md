@@ -13,7 +13,7 @@ how Anycast routes a client to one of many available servers.
 ## Notes
 - Dependencies (tcpdump) are installed directly in the Dockerfile via `RUN apt-get install` 
   so no manual installation is needed after the containers are built
-- All 3 server containers are built from the same image — SERVER_ID environment variable 
+- All 3 server containers are built from the same image. `SERVER_ID` environment variable 
   set in docker-compose.yml is what distinguishes each server's identity at runtime
 - The client container overrides the default CMD from the Dockerfile to run client.py 
   instead of server.py
